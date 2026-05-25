@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JMD — Family Travel, Quietly Magical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#1FA088;
+    --teal-deep:#178572;
+    --green:#2E9F5E;
+    --blue:#156A87;
+    --blue-deep:#0E4F66;
+    --cream:#FAF6EE;
+    --cream-2:#F2EBDB;
+    --ink:#0E2A2A;
+    --ink-soft:#1f4040;
+    --line:rgba(14,42,42,.12);
+    --r-lg:28px;
+    --r-md:18px;
+    --r-sm:10px;
+    --shadow-soft:0 30px 60px -20px rgba(14,42,42,.18), 0 8px 20px -10px rgba(14,42,42,.12);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Outfit',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.55;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* Grain overlay */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:1000;
+    opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container{
+    max-width:1280px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    padding:20px 32px;
+    backdrop-filter:blur(14px);
+    background:rgba(250,246,238,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1280px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    display:flex;align-items:center;
+    transition:opacity .3s;
+  }
+  .logo:hover{opacity:.75}
+  .logo img{
+    height:30px;width:auto;display:block;
+  }
+  .footer-logo img{height:36px;width:auto;display:block;margin-bottom:20px;
+    filter:brightness(0) saturate(100%) invert(33%) sepia(94%) saturate(389%) hue-rotate(125deg) brightness(94%) contrast(91%);
+  }
+  .nav-links{display:flex;gap:36px;font-size:14px;font-weight:500}
+  .nav-links a{color:var(--ink);text-decoration:none;transition:color .3s}
+  .nav-links a:hover{color:var(--teal-deep)}
+  .nav-cta{
+    background:var(--ink);color:var(--cream);
+    padding:10px 22px;border-radius:100px;
+    font-size:13px;font-weight:500;text-decoration:none;
+    transition:transform .3s, background .3s;
+  }
+  .nav-cta:hover{background:var(--teal-deep);transform:translateY(-2px)}
+  @media (max-width:760px){.nav-links{display:none}}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:160px 0 80px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:60px;
+    align-items:center;
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+  }
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;font-weight:500;letter-spacing:.5px;
+    color:var(--teal-deep);
+    margin-bottom:28px;
+  }
+  .eyebrow .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--teal);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.5;transform:scale(1.3)}
+  }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(48px,7vw,96px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    color:var(--ink);
+    margin-bottom:32px;
+  }
+  h1 em{
+    font-style:italic;
+    font-variation-settings:"WONK" 1;
+    color:var(--teal-deep);
+    font-weight:500;
+  }
+
+  .hero-sub{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:480px;
+    margin-bottom:40px;
+  }
+
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+  .btn-primary{
+    background:var(--ink);color:var(--cream);
+    padding:18px 32px;border-radius:100px;
+    font-size:15px;font-weight:500;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:transform .3s, background .3s;
+    border:none;cursor:pointer;
+  }
+  .btn-primary:hover{background:var(--teal-deep);transform:translateY(-3px)}
+  .btn-primary .arrow{transition:transform .3s}
+  .btn-primary:hover .arrow{transform:translateX(4px)}
+  .btn-ghost{
+    background:transparent;color:var(--ink);
+    padding:18px 28px;border-radius:100px;
+    font-size:15px;font-weight:500;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    border:1.5px solid var(--ink);
+    transition:background .3s, color .3s;
+  }
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+
+  .hero-stats{
+    display:flex;gap:48px;
+    padding-top:32px;
+    border-top:1px solid var(--line);
+  }
+  .stat-num{
+    font-family:'Fraunces',serif;
+    font-size:36px;font-weight:500;
+    color:var(--teal-deep);
+    letter-spacing:-1px;
+  }
+  .stat-label{
+    font-size:12px;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:1px;
+    margin-top:4px;
+  }
+
+  /* Hero visual */
+  .hero-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:var(--r-lg);
+    overflow:hidden;
+    box-shadow:var(--shadow-soft);
+    background:var(--teal);
+  }
+  .hero-visual img{
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:transform 1.2s ease;
+  }
+  .hero-visual:hover img{transform:scale(1.05)}
+
+  .floating-card{
+    position:absolute;
+    background:var(--cream);
+    border-radius:var(--r-md);
+    padding:18px 22px;
+    box-shadow:var(--shadow-soft);
+    display:flex;align-items:center;gap:14px;
+    animation:float 6s ease-in-out infinite;
+  }
+  .floating-card.fc-1{
+    bottom:-20px;left:-30px;
+  }
+  .floating-card.fc-2{
+    top:30px;right:-30px;
+    animation-delay:-3s;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+  }
+  .fc-icon{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--teal);
+    display:grid;place-items:center;
+    color:white;
+  }
+  .fc-1 .fc-icon{background:var(--green)}
+  .fc-2 .fc-icon{background:var(--blue)}
+  .fc-text{font-size:12px;color:var(--ink-soft)}
+  .fc-strong{font-size:14px;font-weight:600;color:var(--ink)}
+
+  @media (max-width:900px){
+    .floating-card.fc-1{left:10px}
+    .floating-card.fc-2{right:10px}
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee{
+    overflow:hidden;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--cream-2);
+  }
+  .marquee-track{
+    display:flex;gap:60px;
+    animation:scroll 28s linear infinite;
+    white-space:nowrap;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:28px;
+    color:var(--ink-soft);
+  }
+  .marquee-track span{display:inline-flex;align-items:center;gap:60px}
+  .marquee-track .dot-sep{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--teal);
+    display:inline-block;
+  }
+  @keyframes scroll{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
+
+  /* ===== DESTINATIONS ===== */
+  .destinations{padding:120px 0}
+
+  .section-head{
+    display:flex;justify-content:space-between;align-items:end;
+    margin-bottom:60px;flex-wrap:wrap;gap:20px;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(40px,5vw,68px);
+    line-height:1;
+    letter-spacing:-.02em;
+    max-width:680px;
+  }
+  .section-head h2 em{
+    font-style:italic;
+    color:var(--teal-deep);
+    font-variation-settings:"WONK" 1;
+  }
+  .section-head p{
+    color:var(--ink-soft);max-width:340px;font-size:15px;
+  }
+
+  .dest-grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:24px;
+  }
+  .dest{
+    position:relative;
+    border-radius:var(--r-lg);
+    overflow:hidden;
+    aspect-ratio:4/5;
+    cursor:pointer;
+    transition:transform .4s ease;
+  }
+  .dest:hover{transform:translateY(-8px)}
+  .dest img{
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:transform .8s ease;
+  }
+  .dest:hover img{transform:scale(1.08)}
+  .dest::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 40%,rgba(14,42,42,.7) 100%);
+  }
+  .dest-info{
+    position:absolute;bottom:24px;left:24px;right:24px;
+    color:var(--cream);
+    z-index:2;
+    display:flex;justify-content:space-between;align-items:end;
+  }
+  .dest-name{
+    font-family:'Fraunces',serif;
+    font-size:26px;font-weight:500;
+    line-height:1;
+  }
+  .dest-meta{font-size:12px;opacity:.85;margin-top:6px;letter-spacing:.5px;text-transform:uppercase}
+  .dest-price{
+    background:var(--cream);color:var(--ink);
+    padding:8px 14px;border-radius:100px;
+    font-size:13px;font-weight:600;
+    white-space:nowrap;
+  }
+
+  .dest-1{grid-column:span 7;aspect-ratio:auto;min-height:520px}
+  .dest-2{grid-column:span 5}
+  .dest-3{grid-column:span 4}
+  .dest-4{grid-column:span 4}
+  .dest-5{grid-column:span 4}
+
+  @media (max-width:900px){
+    .dest-1,.dest-2,.dest-3,.dest-4,.dest-5{grid-column:span 12}
+    .dest-1{min-height:auto;aspect-ratio:4/5}
+  }
+
+  /* ===== ABOUT ===== */
+  .about{
+    padding:120px 0;
+    background:var(--ink);
+    color:var(--cream);
+    border-radius:var(--r-lg);
+    margin:0 32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .about::before{
+    content:'';position:absolute;
+    top:-200px;right:-200px;
+    width:600px;height:600px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(31,160,136,.4) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .about-inner{
+    max-width:1216px;margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;
+    align-items:center;
+    position:relative;z-index:1;
+  }
+  @media (max-width:900px){
+    .about-inner{grid-template-columns:1fr;gap:40px}
+    .about{margin:0 16px}
+  }
+  .about h2{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(40px,5vw,68px);
+    line-height:1;
+    letter-spacing:-.02em;
+    margin-bottom:32px;
+  }
+  .about h2 em{font-style:italic;color:var(--teal)}
+  .about p{
+    color:rgba(250,246,238,.75);
+    font-size:17px;
+    margin-bottom:20px;
+    max-width:480px;
+  }
+
+  .services{
+    display:flex;flex-direction:column;gap:1px;
+    background:rgba(250,246,238,.1);
+    border-radius:var(--r-md);
+    overflow:hidden;
+  }
+  .service{
+    padding:28px;
+    background:var(--ink);
+    display:flex;align-items:center;gap:20px;
+    transition:background .3s;
+    cursor:pointer;
+  }
+  .service:hover{background:var(--ink-soft)}
+  .service-num{
+    font-family:'Fraunces',serif;
+    font-size:13px;
+    color:var(--teal);
+    font-variant-numeric:tabular-nums;
+  }
+  .service-title{
+    font-size:18px;font-weight:500;
+    flex:1;
+  }
+  .service-arrow{
+    transition:transform .3s;
+    color:var(--teal);
+  }
+  .service:hover .service-arrow{transform:translate(4px,-4px)}
+
+  /* ===== CTA ===== */
+  .cta-section{
+    padding:160px 32px 120px;
+    text-align:center;
+  }
+  .cta-inner{
+    max-width:780px;margin:0 auto;
+  }
+  .cta-section h2{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(48px,7vw,96px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin-bottom:24px;
+  }
+  .cta-section h2 em{
+    font-style:italic;color:var(--teal-deep);
+    font-variation-settings:"WONK" 1;
+  }
+  .cta-section p{
+    color:var(--ink-soft);
+    font-size:18px;
+    margin-bottom:40px;
+    max-width:520px;
+    margin-left:auto;margin-right:auto;
+  }
+
+  .booking-card{
+    background:var(--cream-2);
+    border-radius:var(--r-lg);
+    padding:32px;
+    box-shadow:var(--shadow-soft);
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr auto;
+    gap:16px;
+    align-items:end;
+    text-align:left;
+    margin-top:48px;
+  }
+  @media (max-width:760px){
+    .booking-card{grid-template-columns:1fr;gap:14px}
+  }
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{
+    font-size:11px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--ink-soft);
+    font-weight:500;
+  }
+  .field input, .field select{
+    background:transparent;border:none;
+    border-bottom:1.5px solid var(--ink);
+    padding:8px 0;font-size:15px;
+    font-family:inherit;color:var(--ink);
+    outline:none;
+  }
+  .field input:focus, .field select:focus{
+    border-color:var(--teal-deep);
+  }
+
+  /* ===== CONTACT/FOOTER ===== */
+  footer{
+    background:var(--cream-2);
+    padding:80px 0 40px;
+    border-top:1px solid var(--line);
+  }
+  .footer-inner{
+    max-width:1216px;margin:0 auto;padding:0 32px;
+  }
+  .footer-top{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:48px;
+    padding-bottom:60px;
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:760px){
+    .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  }
+  .footer-brand h3{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:32px;
+    line-height:1.1;
+    margin-bottom:16px;
+    max-width:320px;
+  }
+  .footer-brand h3 em{font-style:italic;color:var(--teal-deep)}
+  .footer-brand p{font-size:14px;color:var(--ink-soft);max-width:280px}
+
+  .footer-col h4{
+    font-size:12px;text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--ink-soft);font-weight:500;
+    margin-bottom:18px;
+  }
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .footer-col a{
+    color:var(--ink);text-decoration:none;
+    font-size:14px;
+    transition:color .3s;
+  }
+  .footer-col a:hover{color:var(--teal-deep)}
+
+  .footer-bottom{
+    padding-top:32px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;color:var(--ink-soft);
+    flex-wrap:wrap;gap:16px;
+  }
+
+  /* Reveal on load */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    animation:reveal .9s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .reveal-1{animation-delay:.1s}
+  .reveal-2{animation-delay:.25s}
+  .reveal-3{animation-delay:.4s}
+  .reveal-4{animation-delay:.55s}
+  .reveal-5{animation-delay:.7s}
+  @keyframes reveal{
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  ::selection{background:var(--teal);color:var(--cream)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <img src="images/logo-teal.png" alt="JMD Travel" />
+    </a>
+    <div class="nav-links">
+      <a href="#destinations">Destinations</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#book" class="nav-cta">Plan a trip</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow reveal reveal-1">
+          <span class="dot"></span>
+          <span>Family travel, thoughtfully arranged</span>
+        </div>
+        <h1 class="reveal reveal-2">
+          Slow journeys.<br>
+          <em>Bright memories.</em>
+        </h1>
+        <p class="hero-sub reveal reveal-3">
+          We plan trips for families who want a little less rushing and a little more wonder. Hand-picked stays, kid-loved itineraries, no upsells.
+        </p>
+        <div class="hero-ctas reveal reveal-4">
+          <a href="#destinations" class="btn-primary">
+            Explore trips
+            <span class="arrow">→</span>
+          </a>
+          <a href="#about" class="btn-ghost">Our story</a>
+        </div>
+        <div class="hero-stats reveal reveal-5">
+          <div>
+            <div class="stat-num">2.4k+</div>
+            <div class="stat-label">Families flown</div>
+          </div>
+          <div>
+            <div class="stat-num">48</div>
+            <div class="stat-label">Destinations</div>
+          </div>
+          <div>
+            <div class="stat-num">4.9</div>
+            <div class="stat-label">Avg. rating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal reveal-3">
+        <img src="images/hero-clouds.jpg" alt="Family travel — warm light on mountains" />
+        <div class="floating-card fc-1">
+          <div class="fc-icon">✈</div>
+          <div>
+            <div class="fc-text">Next departure</div>
+            <div class="fc-strong">Bali — 3 days</div>
+          </div>
+        </div>
+        <div class="floating-card fc-2">
+          <div class="fc-icon">★</div>
+          <div>
+            <div class="fc-text">Family pick</div>
+            <div class="fc-strong">Sumba retreat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>
+      Sumba <span class="dot-sep"></span>
+      Kyoto <span class="dot-sep"></span>
+      Lisbon <span class="dot-sep"></span>
+      Marrakech <span class="dot-sep"></span>
+      Reykjavík <span class="dot-sep"></span>
+      Hoi An <span class="dot-sep"></span>
+      Cappadocia <span class="dot-sep"></span>
+      Komodo <span class="dot-sep"></span>
+      Mykonos <span class="dot-sep"></span>
+      Tulum <span class="dot-sep"></span>
+    </span>
+    <span aria-hidden="true">
+      Sumba <span class="dot-sep"></span>
+      Kyoto <span class="dot-sep"></span>
+      Lisbon <span class="dot-sep"></span>
+      Marrakech <span class="dot-sep"></span>
+      Reykjavík <span class="dot-sep"></span>
+      Hoi An <span class="dot-sep"></span>
+      Cappadocia <span class="dot-sep"></span>
+      Komodo <span class="dot-sep"></span>
+      Mykonos <span class="dot-sep"></span>
+      Tulum <span class="dot-sep"></span>
+    </span>
+  </div>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinations">
+  <div class="container">
+    <div class="section-head">
+      <h2>Trips kids talk about for <em>years.</em></h2>
+      <p>Five favorites from our 48 curated destinations. Built for slow mornings, big skies, and zero stress.</p>
+    </div>
+
+    <div class="dest-grid">
+      <div class="dest dest-1">
+        <img src="images/bali.jpg" alt="Bali rice terraces" />
+        <div class="dest-info">
+          <div>
+            <div class="dest-name">Bali, Indonesia</div>
+            <div class="dest-meta">7 nights · Family pick</div>
+          </div>
+          <div class="dest-price">from $1,890</div>
+        </div>
+      </div>
+      <div class="dest dest-2">
+        <img src="images/kyoto.jpg" alt="Kyoto temple" />
+        <div class="dest-info">
+          <div>
+            <div class="dest-name">Kyoto, Japan</div>
+            <div class="dest-meta">6 nights</div>
+          </div>
+          <div class="dest-price">from $2,640</div>
+        </div>
+      </div>
+      <div class="dest dest-3">
+        <img src="images/lisbon.jpg" alt="Lisbon street" />
+        <div class="dest-info">
+          <div>
+            <div class="dest-name">Lisbon</div>
+            <div class="dest-meta">5 nights</div>
+          </div>
+          <div class="dest-price">$1,420</div>
+        </div>
+      </div>
+      <div class="dest dest-4">
+        <img src="images/marrakech.jpg" alt="Marrakech market" />
+        <div class="dest-info">
+          <div>
+            <div class="dest-name">Marrakech</div>
+            <div class="dest-meta">6 nights</div>
+          </div>
+          <div class="dest-price">$1,680</div>
+        </div>
+      </div>
+      <div class="dest dest-5">
+        <img src="images/iceland.jpg" alt="Iceland landscape" />
+        <div class="dest-info">
+          <div>
+            <div class="dest-name">Reykjavík</div>
+            <div class="dest-meta">5 nights</div>
+          </div>
+          <div class="dest-price">$2,210</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + SERVICES -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <img src="images/logo-white.png" alt="JMD" style="height:32px;width:auto;display:block;margin-bottom:28px;opacity:.85;" />
+      <h2>A small studio.<br><em>Big on detail.</em></h2>
+      <p>JMD started in a Jakarta living room, planning trips for friends who didn't want generic packages. Today we still book every flight by hand, double-check every booking seat, and call ahead so the kids' menu is ready.</p>
+      <p>No call centers. No spam. Just one person who knows your family, and a plan that fits how you actually travel.</p>
+    </div>
+
+    <div class="services" id="services">
+      <div class="service">
+        <span class="service-num">01</span>
+        <span class="service-title">Family itineraries</span>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service">
+        <span class="service-num">02</span>
+        <span class="service-title">Flights & visas</span>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service">
+        <span class="service-num">03</span>
+        <span class="service-title">Honeymoons & escapes</span>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service">
+        <span class="service-num">04</span>
+        <span class="service-title">Group & multi-gen trips</span>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service">
+        <span class="service-num">05</span>
+        <span class="service-title">On-trip concierge</span>
+        <span class="service-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="book">
+  <div class="cta-inner">
+    <h2>Tell us where, <em>we'll handle the rest.</em></h2>
+    <p>Drop a date and a dream destination. We'll send a draft itinerary within 48 hours — free, no commitment.</p>
+
+    <div class="booking-card">
+      <div class="field">
+        <label>From</label>
+        <input type="text" placeholder="Jakarta (CGK)" />
+      </div>
+      <div class="field">
+        <label>To</label>
+        <input type="text" placeholder="Anywhere warm" />
+      </div>
+      <div class="field">
+        <label>When</label>
+        <input type="text" placeholder="Aug — flexible" />
+      </div>
+      <button class="btn-primary">Start planning <span class="arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo-teal.png" alt="JMD" style="height:30px;width:auto;display:block;margin-bottom:22px;" />
+        <h3>Travel that <em>stays with you</em> — long after you're home.</h3>
+        <p>JMD Travel · A small, hand-picked studio based in Jakarta.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@jmd.travel">hello@jmd.travel</a></li>
+          <li><a href="tel:+622112345678">+62 21 1234 5678</a></li>
+          <li><a href="#">WhatsApp us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 JMD Travel. Made slowly in Jakarta.</span>
+      <span>Privacy · Terms · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
